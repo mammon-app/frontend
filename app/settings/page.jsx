@@ -725,6 +725,7 @@ const Settings = () => {
                           <input
                             type="text"
                             value={address}
+                            disabled
                             className="w-full bg-transparent  border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm outline-none text-[#ffffff]"
                             />
                           <BiCopy
@@ -742,9 +743,10 @@ const Settings = () => {
                           Export Private Key
                         </td>
                         {showPrivateKey ? (
-                        <td className="flex items-center gap-5 w-[280px]  px-[14px] py-[10px] rounded-[8px] shadow-sm ">
+                        <td className="flex items-center gap-5 w-[280px] px-[14px] py-[10px] rounded-[8px] shadow-sm ">
                             <input
                               type="text"
+                              disabled
                               value={privateKey}
                               className="w-full bg-transparent border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm outline-none text-[#ffffff]"
                               />
@@ -758,15 +760,16 @@ const Settings = () => {
                             />
                           </td>
                         ) : (
-                          <td className="flex items-center gap-5 w-[280px] border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm ">
+                          <td className="flex items-center gap-5 w-[280px] px-[14px] py-[10px] rounded-[8px] shadow-sm ">
                             <input
                               type="text"
                               onChange={(e) => setPinCode(e.target.value)}
                               value="******************"
+                              disabled
                               className="w-full bg-transparent border border-[#D0D5DD] px-[14px] py-[10px]  rounded-[8px] shadow-sm outline-none text-[#ffffff]"
                             />
                             <BiCopy
-                              className="text-[#414553] cursor-pointer"
+                              className="text-[white] cursor-pointer"
                               onClick={() => setRevealPrivateKey(true)}
                             />
                           </td>
