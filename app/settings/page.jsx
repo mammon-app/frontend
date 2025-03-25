@@ -466,7 +466,7 @@ const Settings = () => {
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             type="text"
-                            placeholder="username.xlm"
+                            placeholder="username"
                             className="w-full bg-transparent border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm outline-none text-[#ffffff]"
                           />
                         </td>
@@ -476,16 +476,18 @@ const Settings = () => {
                           Country
                         </td>
                         <td className="relative w-[280px]">
-                          <div className="flex items-center justify-between border border-gray-300 p-2 rounded-[6px]">
+                          <div 
+                              onClick={() => setShowCountries(!showCountries)}
+                              className="flex items-center justify-between border border-gray-300 p-2 rounded-[6px]">
                             <input
                               type="text"
+                              disabled
                               value={country}
                               placeholder="Nigeria"
-                              className="outline-none bg-transparent w-full text-[#ffffff]"
+                              className="outline-none bg-transparent w-full text-[white]"
                             />
                             <FaChevronDown
-                              className="cursor-pointer text-gray-300"
-                              onClick={() => setShowCountries(!showCountries)}
+                              className="cursor-pointer text-white"
                             />
                           </div>
                           {showCountries && (
@@ -500,7 +502,7 @@ const Settings = () => {
                                 {loader ? (
                                   <div className="flex items-center justify-center flex-col gap-3 mt-[7rem]">
                                     <FiLoader className="text-[28px] animate-spin" />
-                                    <p className="text-gray-500 text-[14px]">
+                                    <p className="text-black text-[14px]">
                                       Fetching Countries Please Wait...
                                     </p>
                                   </div>
@@ -515,14 +517,14 @@ const Settings = () => {
                                       .map((country, index) => (
                                         <div
                                           key={index}
-                                          className="flex items-center gap-2 hover:bg-gray-300 cursor-pointer p-[5px] text-[14px] text-gray-500"
+                                          className="flex text-black items-center gap-2 hover:bg-gray-300 cursor-pointer p-[5px] text-[14px]"
                                           onClick={() => {
                                             setShowCountries(!showCountries);
                                             setCountry(country.name);
                                           }}
                                         >
-                                          <p>{country.emoji}</p>
-                                          <p>{country.name}</p>
+                                          <p className="text-black">{country.emoji}</p>
+                                          <p className="text-black">{country.name}</p>
                                         </div>
                                       ))}
                                   </>
@@ -710,7 +712,7 @@ const Settings = () => {
                       Privacy
                     </p>
                     <p className="text-[#667085] font-[300]">
-                      Access your public & private key
+                      Access your private key
                     </p>
                   </div>
                   <table className="w-full">
@@ -719,11 +721,11 @@ const Settings = () => {
                         <td className="text-[#ffffff] font-[500] md:py-[1.5rem] w-[180px]">
                           Export Public Key
                         </td>
-                        <td className="flex items-center gap-5 border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm ">
+                        <td className="flex items-center gap-5 w-[280px]  px-[14px] py-[10px] rounded-[8px] shadow-sm ">
                           <input
                             type="text"
                             value={address}
-                            className="w-full bg-transparent border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm outline-none text-[#ffffff]"
+                            className="w-full bg-transparent  border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm outline-none text-[#ffffff]"
                             />
                           <BiCopy
                             className="text-[white] cursor-pointer"
@@ -740,7 +742,7 @@ const Settings = () => {
                           Export Private Key
                         </td>
                         {showPrivateKey ? (
-                          <td className="flex items-center gap-5 border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm ">
+                          <td className="flex items-center w-[280px] gap-5 border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm ">
                             <input
                               type="text"
                               value={privateKey}
@@ -756,12 +758,12 @@ const Settings = () => {
                             />
                           </td>
                         ) : (
-                          <td className="flex items-center gap-5 border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm ">
+                          <td className="flex items-center gap-5 w-[280px] border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm ">
                             <input
                               type="text"
                               onChange={(e) => setPinCode(e.target.value)}
                               value="******************"
-                              className="outline-none bg-[transparent] text-[#ffffff]"
+                              className="w-full bg-transparent border border-[#D0D5DD] px-[14px] py-[10px]  rounded-[8px] shadow-sm outline-none text-[#ffffff]"
                             />
                             <BiCopy
                               className="text-[#414553] cursor-pointer"

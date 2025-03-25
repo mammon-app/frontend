@@ -223,8 +223,8 @@ const AboutSelf = () => {
                                   setCountry(country.name);
                                 }}
                               >
-                                <p>{country.emoji}</p>
-                                <p>{country.name}</p>
+                                <p className="text-black">{country.emoji}</p>
+                                <p className="text-black">{country.name}</p>
                               </div>
                             ))}
                         </>
