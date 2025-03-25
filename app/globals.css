@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.helvetica-neue {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+html,
+body {
+  overflow-x: hidden !important;
+  background-image: linear-gradient(
+    to left top,
+    #011532,
+    #000000,
+    #011532,
+    #011532,
+    #000000
+  );
+  color: #fff !important;
+}
+
+.mobileNav {
+  background-image: #ffffff;
+}
+
+.top-bg {
+  /* background-image: url('../public/images/toptexture.svg'); */
+}
+
+/* For WebKit-based browsers (Chrome, Safari, Edge) */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* .blury-bg{
+  background-color: #eff2ff;
+  filter: blur(100px);
+  position: absolute;
+  z-index: 10;
+} */
+
+.cutom-btn-gradient {
+  background: linear-gradient(90deg, #5a78ff 0%, #072ac8 100%);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #757575;
+  border-radius: 10px;
+}
+
+.leader-board-img {
+  background-image: url("../public/images/leader-board-background.svg");
+  max-width: 100%;
+}
+
+.warning-toast::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 5px;
+  background-color: #c2410c;
+  top: 60px;
+  animation: anim 8s linear forwards;
+}
+
+.success-toast::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 5px;
+  background-color: #166534;
+  top: 60px;
+  animation: anim 8s linear forwards;
+}
+
+.error-toast::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 5px;
+  background-color: #991b1b;
+  top: 60px;
+  animation: anim 8s linear forwards;
+}
+
+.home-text-gradient {
+  background: linear-gradient(
+    90deg,
+    #00daf4 0%,
+    #072ac8 20%,
+    #677acc 40%,
+    #7883e5 60%,
+    #8c95e5 80%,
+    #072ac8 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes anim {
+  100% {
+    width: 0;
+  }
+}
+
+.otp-input {
+  width: 71px !important;
+}
+
+@media screen and (max-width: 376px) {
+  .otp-input {
+    width: 50px !important;
+    height: 50px !important;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .responsive-widths {
+    width: 100% !important;
+  }
+}

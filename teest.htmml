@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Result</title>
+  </head>
+  <body>
+    <div>
+    </div>
+    <script type="text/javascript">
+    function create_form(path, params, method) {
+        method = method || "post"; // Set method to post by default if not specified.
+        var form = document.createElement("form");
+        form.setAttribute("method", method);
+        form.setAttribute("action", path);
+
+        for (var key in params) {
+            if (params.hasOwnProperty(key)) {
+                var hiddenField = document.createElement("input");
+                hiddenField.setAttribute("type", "hidden");
+                hiddenField.setAttribute("name", key);
+                hiddenField.setAttribute("value", params[key]);
+
+                form.appendChild(hiddenField);
+            }
+        }
+
+        return form;
+    }
+    (function () {
+        var url = "http://mywebsite.com/returnurl";
+        url = url.replace(/&amp;/g, "&");
+        var form = create_form(url, { trxId: '0', status: 'Initiated', approved: false }, 'post');
+        //var form = create_form('http://mywebsite.com/returnurl', { trxId: '0', status: 'Initiated', approved: false }, 'post');
+        form.setAttribute('target', '_top');
+        document.body.appendChild(form);
+        form.submit();
+    })();
+</script>
+  </body>
+</html>

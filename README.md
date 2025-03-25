@@ -1,0 +1,1 @@
+<h1>Mammon App Frontend</h1>
