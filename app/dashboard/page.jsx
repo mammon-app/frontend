@@ -377,7 +377,7 @@ const Dashboard = () => {
 
         <div className="w-full lg:w-[84%]  ml-auto">
           <TopNav />
-          <div className={`py-[10px] px-[20px]  mt-5 lg:mx-[25px] mx-[20px] `}>
+          <div className={`py-[10px] px-[10px]  mt-5 lg:mx-[25px] mx-[20px] `}>
             <div className={`my-6 lg:block hidden`}>
               <p className="text-[white] md:text-[28px] text-[18px]">
                 Hi, {userData?.username || "loading..."}
@@ -511,7 +511,7 @@ const Dashboard = () => {
                         setRemoveDropDown(false);
                       }}
                     >
-                      Add an asset
+                      Add Asset
                     </button>
                     <button
                       className="bg-red-500 py-[6px] px-6 text-[12px] text-white md:text-[16px] rounded-[8px]"
@@ -522,7 +522,7 @@ const Dashboard = () => {
                         setDropDown(false);
                       }}
                     >
-                      Remove an asset
+                      Remove Asset
                     </button>
                   </div>
                 </div>
@@ -579,7 +579,7 @@ const Dashboard = () => {
                 {removeDropDown === "trustLine" && (
                   <>
                     <div
-                      className={`absolute w-full border h-[330px] rounded-[6px] bg-white z-[1] py-3 left-0 overflow-y-scroll mt-5 `}
+                      className={`absolute w-full border lg:h-[330px] h-[250px] rounded-[6px] bg-white z-[1] py-3 left-0 overflow-y-scroll mt-5 `}
                     >
                       {loadingWalletAssets ? (
                         <ArrayItemLoader />
@@ -645,7 +645,7 @@ const Dashboard = () => {
                               </p>
                             </div>
                           </div>
-                          <div className="flex flex-col items-end">
+                          <div className="flex flex-col items-end pr-3">
                             <p>{Number(asset?.balance).toFixed(8)}</p>
                             <div className="text-[10px] text-[white] flex items-center gap-[2px]">
                               <p>

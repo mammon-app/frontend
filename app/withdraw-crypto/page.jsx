@@ -145,7 +145,7 @@ const Send = () => {
         <SideNav />
         <div className="lg:w-[84%] w-full ml-auto">
           <TopNav />
-          <div className="py-[20px] px-[30px] h-[100vh]  mt-5 mx-[25px] ">
+          <div className="py-[20px] px-[10px] h-[100vh]  mt-5 mx-[25px] ">
             <div className="mt-5 ml-1">
               <p className="text-primary-color text-[20px] md:text-[36px]">
                 Choose Recipient
@@ -160,10 +160,10 @@ const Send = () => {
             </div>
             <div className="pt-[3rem] pb-[9rem] flex justify-center items-center rounded-[11px] mt-9 flex-col">
               <div className="flex justify-center items-center">
-                <div className="py-6 px-[40px] border border-[#B2B2B27A] rounded-[8px] shadow max-w-[500px]">
+                <div className="py-6 px-[20px] border border-[#B2B2B27A] rounded-[8px] shadow max-w-[500px]">
                   <div className="mb-4">
                     <div className="flex justify-between items-center">
-                      <p className="text-[#ffffff] text-[14px] font-[300]">
+                      <p className="flex text-[#ffffff] text-[14px] font-[300]">
                         Withdrawal amount
                       </p>
                       <div

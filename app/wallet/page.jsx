@@ -344,9 +344,9 @@ const Wallet = () => {
                               alt={asset.asset_name}
                             />
                             <div>
-                              <p className="whitespace-nowrap gap-2 text-white">
+                              {/* <p className="whitespace-nowrap gap-2 text-white">
                                 {asset.asset_name}
-                              </p>
+                              </p> */}
                               <p className="whitespace-nowrap gap-2 text-white">
                                 {asset.asset_code}
                               </p>
@@ -421,9 +421,9 @@ const Wallet = () => {
                               alt={asset.asset_name}
                             />
                             <div>
-                              <p className="whitespace-nowrap gap-2 text-white">
+                              {/* <p className="whitespace-nowrap gap-2 text-white">
                                 {asset.asset_name}
-                              </p>
+                              </p> */}
                               <p className="whitespace-nowrap gap-2 text-white">
                                 {asset.asset_code}
                               </p>

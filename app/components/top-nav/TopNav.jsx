@@ -161,8 +161,8 @@ const TopNav = () => {
         <Link href="/">
           <Image
             src={mobileNav === true ? `/images/mammon-app-logo-dark.svg`:`/images/mammon-app-logo.svg`}
-            width={150}
-            height={150}
+            width={200}
+            height={200}
             alt="Mammon Logo"
           />
         </Link>
@@ -239,8 +239,8 @@ const TopNav = () => {
         </div>
         <div className={
               mobileNav === true
-                ? "p-2 rounded-[8px] bg-[#B9B9B926] text-[24px] cursor-pointer"
-                : "p-2 rounded-[8px] bg-[#000000] text-[24px] cursor-pointer"
+                ? "p-2 rounded-[8px] bg-[#000000] text-[24px] cursor-pointer"
+                : "p-2 rounded-[8px] bg-[#B9B9B926] text-[24px] cursor-pointer"
             }
         >
           <BiMenu onClick={() => setMobileNav(!mobileNav)} />
@@ -401,6 +401,33 @@ const TopNav = () => {
                           />
                         )}
                         <p className="ml-[10px]">Withdraw</p>
+                      </div>
+                    </Link>
+                    <Link
+                      href="/swap-assets"
+                      className={
+                        pathname.includes("withdraw")
+                          ? `flex items-center justify-between py-[10px] text-[#072AC8] bg-[#072AC81F] px-5`
+                          : `px-5 flex items-center justify-between py-[10px] text-black`
+                      }
+                    >
+                      <div className="flex items-center">
+                        {pathname.includes("withdraw") ? (
+                          <Image
+                            src="./images/money-send-colored.svg"
+                            width={20}
+                            height={20}
+                            alt="cup image"
+                          />
+                        ) : (
+                          <Image
+                            src="./images/swap.svg"
+                            width={20}
+                            height={20}
+                            alt="cup image"
+                          />
+                        )}
+                        <p className="ml-[10px]">Swap Assets</p>
                       </div>
                     </Link>
                     <Link

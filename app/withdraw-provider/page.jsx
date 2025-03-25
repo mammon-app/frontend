@@ -138,7 +138,7 @@ const WithdrawProvider = () => {
         <SideNav />
         <div className="w-full lg:w-[84%]  ml-auto">
           <TopNav />
-          <div className="py-[20px] px-[30px] h-[100vh] mt-5 lg:mx-[25px] ">
+          <div className="py-[20px] px-[10px] h-[100vh] mt-5 lg:mx-[25px] ">
             <div className="mt-5 ml-1 hidden lg:block">
               <p className="text-primary-color text-[32px]">Withdraw</p>
               <p className="font-[300] text-[#ffffff]">
@@ -219,23 +219,32 @@ const WithdrawProvider = () => {
             background: "rgba(18, 18, 18, 0.8)",
           }}
         >
-          <div className="bg-[#D2D9F542]" style={{ borderRadius: "0px" }}>
+          <div className="bg-[white]" style={{ borderRadius: "0px" }}>
             {/* <i className=' ri-close-fill block text-[1.2rem] text-end mt-[1rem] mr-[1rem] cursor-pointer'></i> */}
             <div className="flex items-center justify-between mt-[1rem] px-[2rem] mb-[2rem] flex-col">
-              <p className="text-white text-[16px] mb-5 text-center">
+              <p className="text-black text-[16px] mb-5 text-center">
                 Note that you are being redirected to a third-party website to
                 make your withdrawal. <br /> Once transaction is completed
                 please come back to the website to confirm your transaction
               </p>
-              <button
-                className="px-3 py-[6px] text-white bg-primary-color rounded-[5px]"
-                onClick={() => {
-                  window.open(url, "_blank");
-                  setModal("confirmPayment");
-                }}
-              >
-                Continue
-              </button>
+
+              <div className="flex items-center justify-center ">
+                <button
+                  className="px-3 py-[6px] text-white bg-primary-color rounded-[5px]"
+                  onClick={() => {
+                    window.open(url, "_blank");
+                    setModal("confirmPayment");
+                  }}
+                >
+                  Continue
+                </button>
+                <button
+                  className="px-3 py-[6px] text-white bg-red-500 rounded-[5px]"
+                  onClick={() => setModal(false)}
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -255,10 +264,10 @@ const WithdrawProvider = () => {
             background: "rgba(18, 18, 18, 0.8)",
           }}
         >
-          <div className="bg-[#D2D9F542]" style={{ borderRadius: "0px" }}>
+          <div className="bg-[white]" style={{ borderRadius: "0px" }}>
             {/* <i className=' ri-close-fill block text-[1.2rem] text-end mt-[1rem] mr-[1rem] cursor-pointer'></i> */}
             <div className="flex items-center justify-between mt-[1rem] px-[2rem] mb-[2rem] flex-col">
-              <p className="text-white text-[16px] mb-5 text-center">
+              <p className="text-black text-[16px] mb-5 text-center">
                 Click on the button to confirm your transaction
               </p>
               {loading ? (
@@ -266,12 +275,20 @@ const WithdrawProvider = () => {
                   <BtnLoader />
                 </div>
               ) : (
-                <button
-                  className="px-3 py-[6px] text-white bg-primary-color rounded-[5px]"
-                  onClick={queryTransaction}
-                >
-                  Continue
-                </button>
+                <div className="flex items-center justify-center ">
+                  <button
+                    className="px-3 py-[6px] text-white bg-primary-color rounded-[5px]"
+                    onClick={queryTransaction}
+                  >
+                    Continue
+                  </button>
+                  <button
+                    className="px-3 py-[6px] text-white bg-red-500 rounded-[5px]"
+                    onClick={() => setModal(false)}
+                  >
+                    Cancel
+                  </button>
+                </div>
               )}
             </div>
           </div>
@@ -285,7 +302,7 @@ const WithdrawProvider = () => {
               style={{ background: "rgba(14, 14, 14, 0.58)" }}
             ></div>
             <div
-              className="bg-[#D2D9F542] lg:w-[500px] md:w-[50%] sm:w-[70%] w-[90%] fixed top-[50%] left-[50%] z-[100] rounded-[8px]"
+              className="bg-[white] lg:w-[500px] md:w-[50%] sm:w-[70%] w-[90%] fixed top-[50%] left-[50%] z-[100] rounded-[8px]"
               style={{ transform: "translate(-50%, -50%)" }}
             >
               <img
@@ -294,11 +311,11 @@ const WithdrawProvider = () => {
                 className="rounded-t-[11px] w-[100px] mx-auto mt-5"
               />
               <div className="md:px-8 px-4 mt-7 mb-[1rem] text-center">
-                <p className="text-[18px] lg:text-[20px] text-[white] font-[500]">
+                <p className="text-[18px] lg:text-[20px] text-[black] font-[500]">
                   Withdrwal Info:
                 </p>
               </div>
-              <div className="md:w-[80%] w-[90%] mx-auto text-white">
+              <div className="md:w-[80%] w-[90%] mx-auto text-black">
                 {/* <div className="flex justify-between">
                                 <p>Amount Fee</p>
                                 <div className='flex items-center justify-between'>

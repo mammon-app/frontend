@@ -69,26 +69,29 @@ const Login = () => {
           }),
         }
       );
-      if (res) setLoading(false);
+
       const data = await res.json();
       if (data.message.includes("Provide your MFA code")) {
         setAuthPage(true);
+        setLoading(false);
         return;
       }
       if (!res.ok) {
         setMsg(data?.message);
         setAlertType("error");
+        setLoading(false);
         return;
       }
       if (res.ok && data?.data?.isEmailVerified === false) {
         localStorage.setItem("reg-email", email);
         router.replace("/confirm-email");
+        setLoading(false);
         return;
       }
       if (res.ok && data?.data?.stellarPublicKey === undefined) {
         localStorage.setItem("token", data.data.token);
         router.replace("/about-self");
-
+        setLoading(false);
         return;
       }
       if (res.ok && data?.data?.stellarPublicKey) {
@@ -97,6 +100,7 @@ const Login = () => {
         localStorage.setItem("userData", JSON.stringify(safeData));
         ("Stellar Public key");
         router.replace("/dashboard");
+        setLoading(false);
         return;
       }
     }

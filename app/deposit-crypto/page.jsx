@@ -86,7 +86,7 @@ const DepositCrypto = () => {
         <SideNav />
         <div className="w-full lg:w-[84%] ml-auto">
           <TopNav />
-          <div className="py-[20px] h-[100vh] px-[30px]  mt-5 lg:mx-[25px] ">
+          <div className="py-[20px] h-[100vh] px-[10px]  mt-5 lg:mx-[25px] ">
             <div className="mt-5 ml-1 hidden lg:block">
               <p className="text-primary-color text-[32px]">
                 Choose preferred crypto

@@ -70,7 +70,7 @@ const Deposit = () => {
             <SideNav />
             <div className="w-full lg:w-[84%]  ml-auto">
                 <TopNav />
-                <div className="py-[20px] px-[30px] h-[100vh]  mt-5 lg:mx-[25px] ">
+                <div className="py-[20px] px-[10px] h-[100vh]  mt-5 lg:mx-[10px] ">
                   <div className='mt-5 ml-1 hidden lg:block'>
                     <p className='text-[32px] text-primary-color'>Deposit Crypto</p>
                     <p className='font-[300] text-[#000000]'>Add crypto to your balance</p>

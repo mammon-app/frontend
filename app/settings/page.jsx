@@ -715,18 +715,18 @@ const Settings = () => {
                   </div>
                   <table className="w-full">
                     <tbody>
-                      <tr className="border-b border-[#EAECF0] w-full flex items-center gap-[5rem]">
-                        <td className="text-[#ffffff] font-[500] py-[2.5rem]">
+                      <tr className="border-b border-[#EAECF0] w-full md:block grid py-[1.5rem] gap-2">
+                        <td className="text-[#ffffff] font-[500] md:py-[1.5rem] w-[180px]">
                           Export Public Key
                         </td>
                         <td className="flex items-center gap-5 border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm ">
                           <input
                             type="text"
                             value={address}
-                            className="outline-none bg-[transparent] text-[#ffffff]"
-                          />
+                            className="w-full bg-transparent border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm outline-none text-[#ffffff]"
+                            />
                           <BiCopy
-                            className="text-[#414553] cursor-pointer"
+                            className="text-[white] cursor-pointer"
                             onClick={() => {
                               navigator.clipboard.writeText(address);
                               setMsg("Address copied successfully!");
@@ -736,7 +736,7 @@ const Settings = () => {
                         </td>
                       </tr>
                       <tr className="border-b border-[#EAECF0] w-full flex items-center gap-[5rem]">
-                        <td className="text-[#ffffff] font-[500] py-[2.5rem]">
+                        <td className="text-[#ffffff] font-[500] md:py-[1.5rem] w-[180px]">
                           Export Private Key
                         </td>
                         {showPrivateKey ? (
@@ -744,10 +744,10 @@ const Settings = () => {
                             <input
                               type="text"
                               value={privateKey}
-                              className="outline-none bg-[transparent] text-[#ffffff]"
-                            />
+                              className="w-full bg-transparent border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm outline-none text-[#ffffff]"
+                              />
                             <BiCopy
-                              className="text-[#414553] cursor-pointer"
+                              className="text-[white] cursor-pointer"
                               onClick={() => {
                                 navigator.clipboard.writeText(privateKey);
                                 setMsg("Private key copied successfully!");
