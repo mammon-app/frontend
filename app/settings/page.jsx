@@ -496,7 +496,7 @@ const Settings = () => {
                                 type="text"
                                 onChange={(e) => setSeacrhText(e.target.value)}
                                 placeholder="Search Country"
-                                className="border bg-white border-gray-300 w-full placeholder:text-[13px] text-[13px] outline-none px-[4px] rounded mb-1 py-[5px]"
+                                className="border bg-white text-black border-gray-300 w-full placeholder:text-[13px] text-[13px] outline-none px-[4px] rounded mb-1 py-[5px]"
                               />
                               <div>
                                 {loader ? (
@@ -712,7 +712,7 @@ const Settings = () => {
                       Privacy
                     </p>
                     <p className="text-[#667085] font-[300]">
-                      Access your private key
+                      Access your public & private key
                     </p>
                   </div>
                   <table className="w-full">
@@ -737,12 +737,12 @@ const Settings = () => {
                           />
                         </td>
                       </tr>
-                      <tr className="border-b border-[#EAECF0] w-full flex items-center gap-[5rem]">
+                      <tr className="border-b border-[#EAECF0] w-full md:block grid py-[1.5rem] gap-2">
                         <td className="text-[#ffffff] font-[500] md:py-[1.5rem] w-[180px]">
                           Export Private Key
                         </td>
                         {showPrivateKey ? (
-                          <td className="flex items-center w-[280px] gap-5 border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm ">
+                        <td className="flex items-center gap-5 w-[280px]  px-[14px] py-[10px] rounded-[8px] shadow-sm ">
                             <input
                               type="text"
                               value={privateKey}

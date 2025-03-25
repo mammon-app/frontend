@@ -196,7 +196,7 @@ const AboutSelf = () => {
                       type="text"
                       onChange={(e) => setSeacrhText(e.target.value)}
                       placeholder="Search Country"
-                      className="border border-gray-300 w-full placeholder:text-[13px] text-[13px] outline-none px-[4px] rounded mb-1 py-[5px]"
+                      className="border border-gray-300 text-black w-full placeholder:text-[13px] text-[13px] outline-none px-[4px] rounded mb-1 py-[5px]"
                     />
                     <div>
                       {loader ? (
