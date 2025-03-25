@@ -406,15 +406,15 @@ const TopNav = () => {
                     <Link
                       href="/swap-assets"
                       className={
-                        pathname.includes("withdraw")
+                        pathname.includes("swap-assets")
                           ? `flex items-center justify-between py-[10px] text-[#072AC8] bg-[#072AC81F] px-5`
                           : `px-5 flex items-center justify-between py-[10px] text-black`
                       }
                     >
                       <div className="flex items-center">
-                        {pathname.includes("withdraw") ? (
+                        {pathname.includes("swap-assets") ? (
                           <Image
-                            src="./images/money-send-colored.svg"
+                            src="./images/swap-colored.svg"
                             width={20}
                             height={20}
                             alt="cup image"

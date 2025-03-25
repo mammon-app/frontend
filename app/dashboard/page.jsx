@@ -377,7 +377,7 @@ const Dashboard = () => {
 
         <div className="w-full lg:w-[84%]  ml-auto">
           <TopNav />
-          <div className={`py-[10px] px-[10px]  mt-5 lg:mx-[25px] mx-[20px] `}>
+          <div className={`py-[10px] px-[10px]  mt-5 lg:mx-[25px] mx-[10px] `}>
             <div className={`my-6 lg:block hidden`}>
               <p className="text-[white] md:text-[28px] text-[18px]">
                 Hi, {userData?.username || "loading..."}
@@ -530,7 +530,7 @@ const Dashboard = () => {
                 {dropDown === "trustLine" && (
                   <>
                     <div
-                      className={`absolute w-full border h-[330px] rounded-[6px] bg-white z-[1] py-3 left-0 overflow-y-scroll mt-5 `}
+                      className={`absolute w-full border h-[250px] rounded-[6px] bg-white z-[1] py-3 left-0 overflow-y-scroll mt-5 `}
                     >
                       {loadingPUBLIC_ASSETS ? (
                         <ArrayItemLoader />
