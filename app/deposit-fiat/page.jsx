@@ -54,7 +54,7 @@ const DepositCurrency = () => {
                   <div className="lg:flex items-center justify-center hidden">
                     <button
                       className="py-2 w-[90%] mx-auto text-white bg-primary-color rounded-[6px] mb-3 mt-[4rem]"
-                      onClick={() => router.replace(`/withdraw-provider`)}
+                      onClick={() => router.replace(`/deposit-provider`)}
                     >
                       Proceed
                     </button>
