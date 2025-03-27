@@ -115,12 +115,12 @@ const Login = () => {
       {authPage ? (
         <div className="relative">
           <AuthNav />
-          <div className="sm:mt-[5rem] mt-[7rem] h-[100vh] ">
+          <div className="sm:mt-[5rem] mt-[2rem] h-[100vh] ">
             <div className="flex flex-col justify-center items-center relative z-[11]">
               <div className="px-4 sm:px-8 pt-8 pb-5 rounded-[16px] w-full sm:w-[488px] border">
                 <div className="hidden top-bg relative top-[-20px] sm:flex items-center justify-center w-[300px] mx-auto">
                   <img
-                    src="./images/mammon-finance-favicon.svg"
+                    src="./images/mammon-app-favicon.svg"
                     alt="Mammon App Logo"
                     className="mx-auto mb-4 relative top-[-65px]"
                   />
@@ -158,21 +158,27 @@ const Login = () => {
                           {...props}
                           placeholder="1"
                           style={{ width: "50px" }}
+                          disabled={verifyCodeLoader}
                           className="text-center outline-none font-[500] h-[58px] rounded-[4px] w-[71px] border placeholder:text-[#96969659] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                         />
                       )}
                     />
                   </div>
-                  {loading ? (
-                    <BtnLoader />
-                  ) : (
-                    <button
-                      onClick={handleSignIn}
-                      className="bg-primary-color text-white py-2 px-4 rounded-[8px] text-[14px] mt-5"
-                    >
-                      Verify Code
-                    </button>
-                  )}
+
+                  <button
+                    onClick={handleSignIn}
+                    disabled={verifyCodeLoader}
+                    className="flex justify-center items-center bg-primary-color text-white py-2 px-4 rounded-[8px] text-[14px] mt-5"
+                  >
+                    <span>Verify Code</span>
+                    {verifyCodeLoader && (
+                      <img
+                        src="./images/loader.gif"
+                        className="w-[20px] mx-2"
+                        alt=""
+                      />
+                    )}
+                  </button>
                 </form>
               </div>
             </div>
@@ -212,22 +218,20 @@ const Login = () => {
                     className="mt-5 w-full border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm outline-none text-[#ffffff]"
                     onChange={(e) => setMfaCode(e.target.value)}
                   />
-                  {verifyCodeLoader ? (
-                    <button className="bg-primary-color text-white py-[8px] px-8 rounded-[6px] mt-5 w-full text-[14px] lg:text-[16px]">
+                  <button
+                    className="flex justify-center items-center bg-primary-color text-white py-[8px] px-8 rounded-[6px] mt-5 w-full text-[14px] lg:text-[16px]"
+                    onClick={handleSignIn}
+                    disabled={verifyCodeLoader}
+                  >
+                    <span>Verify Code</span>
+                    {verifyCodeLoader && (
                       <img
                         src="./images/loader.gif"
-                        className="w-[20px] mx-auto"
+                        className="w-[20px] mx-2"
                         alt=""
                       />
-                    </button>
-                  ) : (
-                    <button
-                      className="bg-primary-color text-white py-[8px] px-8 rounded-[6px] mt-5 w-full text-[14px] lg:text-[16px]"
-                      onClick={handleSignIn}
-                    >
-                      Verify code
-                    </button>
-                  )}
+                    )}
+                  </button>
                 </div>
               </div>
             </div>
@@ -241,7 +245,7 @@ const Login = () => {
               <div className="border border-[#B2B2B27A] px-4 sm:px-8 pt-8 pb-5 rounded-[16px] w-full sm:w-[488px]">
                 <div className="hidden top-bg relative top-[-20px] sm:flex items-center justify-center w-[300px] mx-auto">
                   <img
-                    src="./images/mammon-finance-favicon.svg"
+                    src="./images/mammon-app-favicon.svg"
                     alt="Mammon App Logo"
                     className="mx-auto mb-4 relative top-[-65px]"
                   />
@@ -263,6 +267,7 @@ const Login = () => {
                     <input
                       type="text"
                       onChange={(e) => setEmail(e.target.value)}
+                      disabled={loading}
                       placeholder="Enter your email"
                       autoComplete="off"
                       className="bg-transparent border border-[#B2B2B27A] text-[#ffffff] p-2 rounded-[6px] outline-none w-full autofill:bg-transparent autofill:shadow-[0_0_0px_1000px_rgba(0,0,0,0)]"
@@ -276,18 +281,19 @@ const Login = () => {
                       <input
                         type={passwordType}
                         onChange={(e) => setPassword(e.target.value)}
+                        disabled={loading}
                         placeholder="********"
                         autoComplete="off"
                         className="outline-none w-full bg-transparent text-white autofill:bg-transparent autofill:shadow-[0_0_0px_1000px_rgba(0,0,0,0)]"
                       />
                       <div>
                         {passwordType === "password" ? (
-                          <ImCheckboxUnchecked
+                          <GoEye
                             className="cursor-pointer white"
                             onClick={() => setPasswordType("text")}
                           />
                         ) : (
-                          <ImCheckboxChecked
+                          <GoEyeClosed
                             className="cursor-pointer white"
                             onClick={() => setPasswordType("password")}
                           />
@@ -301,16 +307,22 @@ const Login = () => {
                   >
                     Forgot Password?
                   </p>
-                  {loading ? (
-                    <BtnLoader />
-                  ) : (
-                    <button
-                      onClick={handleSignIn}
-                      className="bg-primary-color text-white py-2 px-4 rounded-[8px] text-[14px] mt-5"
-                    >
-                      Login
-                    </button>
-                  )}
+
+                  <button
+                    onClick={handleSignIn}
+                    disabled={loading}
+                    className="flex justify-center items-center bg-primary-color text-white py-2 px-4 rounded-[8px] text-[14px] mt-5"
+                  >
+                    <span>Login</span>
+                    {loading && (
+                      <img
+                        src="./images/loader.gif"
+                        className="w-[20px] mx-2"
+                        alt=""
+                      />
+                    )}
+                  </button>
+
                   <div className="text-center text-white mt-5 sm:mt-[40px] text-[14px]">
                     Don&apos;t have an account?{" "}
                     <Link href="/create-account" className="text-blue-600">
@@ -367,25 +379,25 @@ const Login = () => {
                   <input
                     type="text"
                     placeholder="******"
+                    disabled={verifyCodeLoader}
                     className="mt-5 w-full border border-[#D0D5DD] bg-transparent px-[14px] py-[10px] rounded-[8px] shadow-sm outline-none text-[#ffffff]"
                     onChange={(e) => setMfaCode(e.target.value)}
                   />
-                  {verifyCodeLoader ? (
-                    <button className="bg-primary-color text-white py-[8px] px-8 rounded-[6px] mt-5 w-full text-[14px] lg:text-[16px]">
+
+                  <button
+                    className="flex justify-center items-center bg-primary-color text-white py-[8px] px-8 rounded-[6px] mt-5 w-full text-[14px] lg:text-[16px]"
+                    onClick={handleSignIn}
+                    disabled={verifyCodeLoader}
+                  >
+                    <span>Verify code</span>
+                    {verifyCodeLoader && (
                       <img
                         src="./images/loader.gif"
-                        className="w-[20px] mx-auto"
+                        className="w-[20px] mx-2"
                         alt=""
                       />
-                    </button>
-                  ) : (
-                    <button
-                      className="bg-primary-color text-white py-[8px] px-8 rounded-[6px] mt-5 w-full text-[14px] lg:text-[16px]"
-                      onClick={handleSignIn}
-                    >
-                      Verify code
-                    </button>
-                  )}
+                    )}
+                  </button>
                 </div>
               </div>
             </div>

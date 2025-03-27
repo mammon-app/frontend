@@ -10,6 +10,8 @@ import Cookies from "js-cookie";
 import BtnLoader from "../components/btn-loader/BtnLoader";
 import { Red_Hat_Mono } from "next/font/google";
 import { useRouter } from "next/navigation";
+import { BsLightningCharge } from "react-icons/bs";
+
 const redHatMono = Red_Hat_Mono({ subsets: ["latin"] });
 
 const Send = () => {
@@ -202,6 +204,7 @@ const Send = () => {
                           </div>
                           <input
                             type="number"
+                            disabled={loading}
                             onChange={(e) => setSourceAmount(e.target.value)}
                             className="outline-none w-1/2  bg-transparent text-[#ffffff]"
                             placeholder="Enter amount"
@@ -215,6 +218,7 @@ const Send = () => {
                               key={index}
                               className="py-2 px-4 cursor-pointer hover:bg-[#D2D9F542]"
                               onClick={() => {
+                                if (loading) return;
                                 setSelectedAsset(asset);
                                 setCurrencyDropDown(false);
                                 setCurrentbalance(asset.balance);
@@ -257,6 +261,7 @@ const Send = () => {
                                   : ""
                               }`}
                               onClick={() => {
+                                if (loading) return;
                                 setSelectedTab(item);
                                 setSelectedTabIndex(index);
                               }}
@@ -277,6 +282,7 @@ const Send = () => {
                             onChange={(e) => setAddress(e.target.value)}
                             type="text"
                             placeholder="Enter recipient address..."
+                            disabled={loading}
                             className="bg-transparent  text-[#ffffff] font-[300] outline-none w-[90%]"
                           />
                           {/* <p className='text-[#ffffff] font-[300]'></p> */}
@@ -284,8 +290,7 @@ const Send = () => {
                         </div>
                         <p className="text-[#ffffff] py-4 px-2 bg-[#D2D9F542] rounded-[6px] mt-2 text-[12px] font-[300]">
                           It’s a Mammon account. Send instantly and 0 fee via
-                          PayID:{" "}
-                          <span className="text-white">****</span>
+                          PayID: <span className="text-white">****</span>
                         </p>
                       </div>
                     )}
@@ -297,6 +302,7 @@ const Send = () => {
                             <p
                               key={index}
                               onClick={() => {
+                                if (loading) return;
                                 setSelectedInfo(info);
                                 setSelectedInfoIndex(index);
                               }}
@@ -323,8 +329,7 @@ const Send = () => {
                         </div>
                         <p className="text-[#ffffff] py-4 px-2 bg-[#D2D9F542] rounded-[6px] mt-2 text-[12px] font-[300]">
                           It’s a Mammon account. Send instantly and 0 fee via
-                          PayID:{" "}
-                          <span className="text-white">****</span>
+                          PayID: <span className="text-white">****</span>
                         </p>
                       </div>
                     )}
@@ -391,16 +396,21 @@ const Send = () => {
                       </div>
                     )}
                   </div>
-                  {loading ? (
-                    <BtnLoader />
-                  ) : (
-                    <button
-                      onClick={sendMoney}
-                      className="bg-primary-color text-white p-3 rounded-lg w-full mt-[2rem]"
-                    >
-                      Confirm
-                    </button>
-                  )}
+
+                  <button
+                    onClick={sendMoney}
+                    disabled={loading}
+                    className="flex justify-center items-center bg-primary-color text-white p-3 rounded-lg w-full mt-[2rem]"
+                  >
+                    <span>Confirm</span>
+                    {loading && (
+                      <img
+                        src="./images/loader.gif"
+                        className="w-[20px] mx-2"
+                        alt=""
+                      />
+                    )}
+                  </button>
                 </div>
               </div>
               {/* <div className='bg-[#F8F8F8] py-6 md:px-[40px] px-[16px] rounded-[8px] shadow w-[500px] mt-[1.5rem] border border-[#B2B2B27A]'>

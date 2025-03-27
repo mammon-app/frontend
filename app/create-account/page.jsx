@@ -7,7 +7,7 @@ import { FaGoogle } from "react-icons/fa";
 import { FaDiscord } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa6";
 import { GoEye, GoEyeClosed } from "react-icons/go";
-
+import { BsLightningCharge } from "react-icons/bs";
 import AuthNav from "../components/auth-nav/AuthNav";
 import Alert from "../components/alert/Alert";
 import BtnLoader from "../components/btn-loader/BtnLoader";
@@ -61,7 +61,7 @@ const CreateAccount = () => {
           }),
         }
       );
-    
+
       const data = await res.json();
       if (!res.ok) {
         setMsg(data.message);
@@ -99,12 +99,12 @@ const CreateAccount = () => {
   return (
     <div className="relative">
       <AuthNav />
-      <div className="sm:mt-[10rem] h-[100vh] mt-[7rem]">
+      <div className="sm:mt-[10rem] h-[100vh] mt-[2rem]">
         <div className="flex flex-col justify-center items-center relative z-[11]">
           <div className="border border-[#B2B2B27A] px-4 sm:px-8 pt-8 pb-5 rounded-[16px]  w-full sm:w-[588px]">
             <div className="top-bg relative top-[-20px] sm:flex items-center justify-center w-[300px] mx-auto hidden">
               <img
-                src="./images/mammon-finance-favicon.svg"
+                src="./images/mammon-app-favicon.svg"
                 alt="Mammon App Logo"
                 className="mx-auto mb-4 relative top-[-65px]"
               />
@@ -119,7 +119,7 @@ const CreateAccount = () => {
             </div>
 
             <form className="flex flex-col sm:w-[400px] mx-auto">
-              <div className="w-full flex flex-col gap-3 mb-[20px]">
+              {/* <div className="w-full flex flex-col gap-3 mb-[20px]">
                 <button
                   onClick={handleGoogleLogin}
                   className="bg-transparent border border-[#B2B2B27A] text-[#ffffff] py-2 px-4 rounded-[8px] sm:text-[16px] text-[14px] flex items-center justify-center w-full shadow"
@@ -137,7 +137,7 @@ const CreateAccount = () => {
                 <div className="h-[1px] bg-[#ffffff] w-full"></div>
                 <p className="text-[#ffffff]">OR</p>
                 <div className="h-[1px] bg-[#ffffff] w-full"></div>
-              </div>
+              </div> */}
 
               <div>
                 <label
@@ -150,6 +150,7 @@ const CreateAccount = () => {
                   type="email"
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
+                  disabled={loading}
                   autoComplete="off"
                   className="border autofill:bg-transparent autofill:shadow-[0_0_0px_1000px_rgba(0,0,0,0)] border-[#B2B2B27A] bg-transparent text-[#ffffff] p-2 rounded-[8px] outline-none w-full"
                 />
@@ -164,6 +165,7 @@ const CreateAccount = () => {
                     type={passwordType}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="********"
+                    disabled={loading}
                     autoComplete="off"
                     className="outline-none w-full bg-transparent autofill:bg-transparent autofill:shadow-[0_0_0px_1000px_rgba(0,0,0,0)]"
                   />
@@ -191,18 +193,19 @@ const CreateAccount = () => {
                   <input
                     type={passwordType}
                     onChange={(e) => setConfirmPassword(e.target.value)}
+                    disabled={loading}
                     placeholder="********"
                     autoComplete="off"
                     className="outline-none w-full bg-transparent autofill:bg-transparent autofill:shadow-[0_0_0px_1000px_rgba(0,0,0,0)]"
                   />
                   <div>
                     {passwordType === "password" ? (
-                      <ImCheckboxUnchecked
+                      <GoEye
                         className="cursor-pointer text-white"
                         onClick={() => setPasswordType("text")}
                       />
                     ) : (
-                      <ImCheckboxChecked
+                      <GoEyeClosed
                         className="cursor-pointer text-white"
                         onClick={() => setPasswordType("password")}
                       />
@@ -210,16 +213,20 @@ const CreateAccount = () => {
                   </div>
                 </div>
               </div>
-              {loading ? (
-                <BtnLoader />
-              ) : (
-                <button
-                  onClick={handleAccountCreation}
-                  className="bg-primary-color text-white py-2 px-4 rounded-[8px] mt-5 text-[14px]"
-                >
-                  Create Account
-                </button>
-              )}
+              <button
+                onClick={handleAccountCreation}
+                className="flex justify-center items-center bg-primary-color text-white py-2 px-4 rounded-[8px] mt-5 text-[14px]"
+                disabled={loading}
+              >
+                <span>Create Account</span>
+                {loading && (
+                  <img
+                    src="./images/loader.gif"
+                    className="w-[20px] mx-2"
+                    alt=""
+                  />
+                )}
+              </button>
             </form>
             <div className="text-[white] text-[14px] flex items-center gap-1 mt-2 justify-center">
               By joining, you agree to our

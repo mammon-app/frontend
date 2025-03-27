@@ -29,7 +29,7 @@ const DepositCurrency = () => {
               </p>
             </div>
             <div className="mt-9 ">
-              <h2 className="text-center lg:text-[#151517] text-white mb-2 font-[500] lg:font-[400]">
+              <h2 className="text-center lg:text-[white] text-white mb-2 font-[500] lg:font-[400]">
                 Choose your deposit method
               </h2>
               <div className="flex items-center gap-5">
@@ -38,9 +38,9 @@ const DepositCurrency = () => {
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="text-[#ffffff]">Bank Transfer</p>
-                        <p className="font-300 text-[#ffffff]">
+                        {/* <p className="font-300 text-[#ffffff]">
                           Nigerian Naira
-                        </p>
+                        </p> */}
                       </div>
                       <div className="bg-[#ffffff] p-1 rounded-full">
                         <RiBankLine className="text-primary-color text-[22px]" />

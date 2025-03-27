@@ -102,7 +102,7 @@ const AboutSelf = () => {
           <div className="border border-[#B2B2B27A] px-4 sm:px-8 pt-8 pb-5 rounded-[16px] w-full max-w-[488px]">
             <div className="top-bg relative top-[-20px] hidden sm:flex items-center justify-center w-[300px] mx-auto">
               <img
-                src="./images/mammon-finance-favicon.svg"
+                src="./images/mammon-app-favicon.svg"
                 alt="Mammon App Logo"
                 className="mx-auto mb-4 relative top-[-65px]"
               />
@@ -233,16 +233,20 @@ const AboutSelf = () => {
                   </div>
                 )}
               </div>
-              {loading ? (
-                <BtnLoader />
-              ) : (
-                <button
-                  onClick={handleAboutSelfCreation}
-                  className="bg-primary-color text-white py-2 px-4 rounded-[8px] mt-7"
-                >
-                  Confirm
-                </button>
-              )}
+              <button
+                onClick={handleAboutSelfCreation}
+                disabled={loading}
+                className="bg-primary-color flex justify-center items-center text-white py-2 px-4 rounded-[8px] mt-7"
+              >
+                <span>Confirm</span>
+                {loading && (
+                  <img
+                    src="./images/loader.gif"
+                    className="w-[20px] mx-2"
+                    alt=""
+                  />
+                )}
+              </button>
               <div className="text-center text-[white] mt-5 sm:mt-[70px] text-[14px]">
                 Already have an account?{" "}
                 <Link href="/login" className="text-blue-600">

@@ -3,9 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { BsLightningChargeFill } from "react-icons/bs";
 import Alert from '../alert/Alert';
 import { Red_Hat_Mono } from "next/font/google";
-
 const redHatMono = Red_Hat_Mono({ subsets: ["latin"] });
-
 
 const EarnPointsModal = ({setEarnPointsModal}) => {
 

@@ -51,7 +51,7 @@ const ConfirmEmail = () => {
       );
       const data = await res.json();
       if (res) setLoading(false);
-      (data);
+      data;
       if (res.ok) {
         router.replace("/about-self");
       } else {
@@ -63,7 +63,7 @@ const ConfirmEmail = () => {
 
   async function resendOtp(e) {
     e.preventDefault();
-    (JSON.stringify({ email }));
+    JSON.stringify({ email });
     setLoading(true);
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/auth/resend-verify-email-otp`,
@@ -78,7 +78,7 @@ const ConfirmEmail = () => {
     );
     if (res) setLoading(false);
     const data = await res.json();
-    (data);
+    data;
     if (res.ok) {
       setMsg(data.message);
       setAlertType("success");
@@ -96,7 +96,7 @@ const ConfirmEmail = () => {
           <div className="border border-[#B2B2B27A] px-4 sm:px-8 pt-8 pb-5 rounded-[16px] w-full sm:w-[488px]">
             <div className="top-bg relative top-[-20px] hidden sm:flex items-center justify-center w-[300px] mx-auto">
               <img
-                src="./images/mammon-finance-favicon.svg"
+                src="./images/mammon-app-favicon.svg"
                 alt="Mammon App Logo"
                 className="mx-auto mb-4 relative top-[-65px]"
               />
@@ -137,16 +137,20 @@ const ConfirmEmail = () => {
               <p className="text-[#ffffff] text-[12px] mt-2 mb-[1rem] text-center">
                 Please check your email inbox for an OTP code
               </p>
-              {loading ? (
-                <BtnLoader />
-              ) : (
-                <button
-                  onClick={handleConfirmEmail}
-                  className="bg-primary-color text-white w-[90%] mx-auto py-2 px-4 rounded-[8px] mt-5"
-                >
-                  Confirm
-                </button>
-              )}
+              <button
+                onClick={handleConfirmEmail}
+                disabled={loading}
+                className="flex justify-center items-center bg-primary-color text-white w-[90%] mx-auto py-2 px-4 rounded-[8px] mt-5"
+              >
+                <span>Confirm</span>
+                {loading && (
+                  <img
+                    src="./images/loader.gif"
+                    className="w-[20px] mx-2"
+                    alt=""
+                  />
+                )}
+              </button>
               <p
                 className="text-[#ffffff] text-[12px] mt-4 mb-[0.5rem] text-center cursor-pointer"
                 onClick={resendOtp}

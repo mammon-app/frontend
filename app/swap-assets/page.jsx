@@ -16,6 +16,7 @@ import BtnLoader from "../components/btn-loader/BtnLoader";
 import Alert from "../components/alert/Alert";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { BsLightningCharge } from "react-icons/bs";
 
 const SwapAsset = () => {
   const pricesArray = ["200", "300", "500", "1,000"];
@@ -284,6 +285,7 @@ const SwapAsset = () => {
                             onChange={(e) => setSourceAmount(e.target.value)}
                             className="outline-none w-1/2 bg-transparent text-[#ffffff]"
                             placeholder="Enter amount"
+                            disabled={loading}
                           />
                         </div>
                       </div>
@@ -363,6 +365,7 @@ const SwapAsset = () => {
                               key={index}
                               className="py-2 px-4 cursor-pointer "
                               onClick={() => {
+                                if (loading) return;
                                 setSelectedAssetReceive(asset);
                                 setCurrencyDropDown(false);
                               }}
@@ -401,6 +404,7 @@ const SwapAsset = () => {
                       max={10}
                       step={0.01}
                       value={value}
+                      disabled={loading}
                       onChange={handleChange}
                       className="w-full h-1 mb-2 bg-gray-200 rounded-lg appearance-none cursor-pointer range-sm dark:bg-gray-700"
                     />
@@ -416,16 +420,21 @@ const SwapAsset = () => {
                                             ))
                                         }
                                     </div> */}
-                  {loading ? (
-                    <BtnLoader />
-                  ) : (
-                    <button
-                      onClick={swapAssets}
-                      className="bg-primary-color text-white p-3 rounded-lg w-full mt-[1rem]"
-                    >
-                      Next
-                    </button>
-                  )}
+
+                  <button
+                    onClick={swapAssets}
+                    disabled={loading}
+                    className="flex justify-center items-center bg-primary-color text-white p-3 rounded-lg w-full mt-[1rem]"
+                  >
+                    <span>Swap</span>
+                    {loading && (
+                      <img
+                        src="./images/loader.gif"
+                        className="w-[20px] mx-2"
+                        alt=""
+                      />
+                    )}
+                  </button>
                 </div>
                 {/* <div className="flex flex-row-reverse px-[40px] items-end justify-between lg:max-w-[1400px] md:w-[100%] mx-auto">
                   <div className="flex justify-center items-center w-full">

@@ -16,10 +16,9 @@ import { ImCheckboxChecked, ImCheckboxUnchecked } from "react-icons/im";
 import QRCode from "react-qr-code";
 import { IoCopyOutline } from "react-icons/io5";
 import Loader from "../components/loader/Loader";
+import { BsLightningCharge } from "react-icons/bs";
 
 const Settings = () => {
-  //   const API_KEY = import.meta.env.VITE_API_KEY
-  //   const BASE_URL = import.meta.env.VITE_BASE_URL
   const [showCountries, setShowCountries] = useState(false);
   const [pinCode, setPinCode] = useState("");
 
@@ -464,6 +463,7 @@ const Settings = () => {
                         <td className="w-[280px]">
                           <input
                             value={username}
+                            disabled={loading}
                             onChange={(e) => setUsername(e.target.value)}
                             type="text"
                             placeholder="username"
@@ -476,9 +476,10 @@ const Settings = () => {
                           Country
                         </td>
                         <td className="relative w-[280px]">
-                          <div 
-                              onClick={() => setShowCountries(!showCountries)}
-                              className="flex items-center justify-between border border-gray-300 p-2 rounded-[6px]">
+                          <div
+                            onClick={() => setShowCountries(!showCountries)}
+                            className="flex items-center justify-between border border-gray-300 p-2 rounded-[6px]"
+                          >
                             <input
                               type="text"
                               disabled
@@ -486,15 +487,14 @@ const Settings = () => {
                               placeholder="Nigeria"
                               className="outline-none bg-transparent w-full text-[white]"
                             />
-                            <FaChevronDown
-                              className="cursor-pointer text-white"
-                            />
+                            <FaChevronDown className="cursor-pointer text-white" />
                           </div>
                           {showCountries && (
                             <div className="bg-white w-full absolute z-10 top-[75px] rounded-[4px] border border-gray-300 h-[300px] overflow-x-hidden overflow-y-scroll left-0 px-2 py-3">
                               <input
                                 type="text"
                                 onChange={(e) => setSeacrhText(e.target.value)}
+                                disabled={loading}
                                 placeholder="Search Country"
                                 className="border bg-white text-black border-gray-300 w-full placeholder:text-[13px] text-[13px] outline-none px-[4px] rounded mb-1 py-[5px]"
                               />
@@ -523,8 +523,12 @@ const Settings = () => {
                                             setCountry(country.name);
                                           }}
                                         >
-                                          <p className="text-black">{country.emoji}</p>
-                                          <p className="text-black">{country.name}</p>
+                                          <p className="text-black">
+                                            {country.emoji}
+                                          </p>
+                                          <p className="text-black">
+                                            {country.name}
+                                          </p>
                                         </div>
                                       ))}
                                   </>
@@ -541,6 +545,7 @@ const Settings = () => {
                         <td className="w-[280px]">
                           <input
                             value={email}
+                            disabled={loading}
                             type="text"
                             placeholder="Enter your email"
                             className="border bg-transparent border-[#D0D5DD] px-[14px] py-[10px] w-full rounded-[8px] shadow-sm outline-none text-[#ffffff] cursor-not-allowed"
@@ -610,22 +615,21 @@ const Settings = () => {
                     <button className="border border-[#D0D5DD] py-2 px-5 rounded-[8px] text-[#ffffff]">
                       Cancel
                     </button>
-                    {loading ? (
-                      <button className="bg-primary-color py-2 px-[30px] rounded-[8px] text-white">
+
+                    <button
+                      className="bg-primary-color py-2 px-5 rounded-[8px] text-white"
+                      onClick={profileUpdate}
+                      disabled={loading}
+                    >
+                      <span>Save</span>
+                      {loading && (
                         <img
                           src="./images/loader.gif"
-                          className="w-[20px]"
+                          className="w-[20px] mx-2"
                           alt=""
                         />
-                      </button>
-                    ) : (
-                      <button
-                        className="bg-primary-color py-2 px-5 rounded-[8px] text-white"
-                        onClick={profileUpdate}
-                      >
-                        Save
-                      </button>
-                    )}
+                      )}
+                    </button>
                   </div>
                 </div>
               )}
@@ -649,6 +653,7 @@ const Settings = () => {
                         <input
                           onChange={(e) => setOldPassword(e.target.value)}
                           type="password"
+                          disabled={loading}
                           placeholder="********"
                           className="w-full bg-transparent border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm outline-none text-[#ffffff]"
                         />
@@ -662,6 +667,7 @@ const Settings = () => {
                         <input
                           onChange={(e) => setPassword(e.target.value)}
                           type="password"
+                          disabled={loading}
                           placeholder="********"
                           className="w-full bg-transparent border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm outline-none text-[#ffffff]"
                         />
@@ -675,6 +681,7 @@ const Settings = () => {
                         <input
                           onChange={(e) => setConfirmPassword(e.target.value)}
                           type="password"
+                          disabled={loading}
                           placeholder="********"
                           className="w-full bg-transparent border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm outline-none text-[#ffffff]"
                         />
@@ -685,22 +692,21 @@ const Settings = () => {
                     <button className="border border-[#D0D5DD] py-2 px-5 rounded-[8px] text-[#ffffff]">
                       Cancel
                     </button>
-                    {loading ? (
-                      <button className="bg-primary-color py-2 px-[30px] rounded-[8px] text-white">
+
+                    <button
+                      className="bg-primary-color py-2 px-5 rounded-[8px] text-white"
+                      onClick={passwordUpdate}
+                      disabled={loading}
+                    >
+                      <span>Save</span>
+                      {loading && (
                         <img
                           src="./images/loader.gif"
-                          className="w-[20px]"
+                          className="w-[20px] mx-2"
                           alt=""
                         />
-                      </button>
-                    ) : (
-                      <button
-                        className="bg-primary-color py-2 px-5 rounded-[8px] text-white"
-                        onClick={passwordUpdate}
-                      >
-                        Save
-                      </button>
-                    )}
+                      )}
+                    </button>
                   </div>
                 </div>
               )}
@@ -727,7 +733,7 @@ const Settings = () => {
                             value={address}
                             disabled
                             className="w-full bg-transparent  border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm outline-none text-[#ffffff]"
-                            />
+                          />
                           <BiCopy
                             className="text-[white] cursor-pointer"
                             onClick={() => {
@@ -743,13 +749,13 @@ const Settings = () => {
                           Export Private Key
                         </td>
                         {showPrivateKey ? (
-                        <td className="flex items-center gap-5 w-[280px] px-[14px] py-[10px] rounded-[8px] shadow-sm ">
+                          <td className="flex items-center gap-5 w-[280px] px-[14px] py-[10px] rounded-[8px] shadow-sm ">
                             <input
                               type="text"
                               disabled
                               value={privateKey}
                               className="w-full bg-transparent border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm outline-none text-[#ffffff]"
-                              />
+                            />
                             <BiCopy
                               className="text-[white] cursor-pointer"
                               onClick={() => {
@@ -806,6 +812,7 @@ const Settings = () => {
                               type="checkbox"
                               value=""
                               class="sr-only peer"
+                              disabled={loading}
                               checked
                             />
                             <div
@@ -852,22 +859,21 @@ const Settings = () => {
                     <button className="border border-[#D0D5DD] py-2 px-5 rounded-[8px] text-[#ffffff]">
                       Cancel
                     </button>
-                    {loading ? (
-                      <button className="bg-primary-color py-2 px-[30px] rounded-[8px] text-white">
+
+                    <button
+                      className="bg-primary-color py-2 px-5 rounded-[8px] text-white"
+                      onClick={passwordUpdate}
+                      disabled={loading}
+                    >
+                      <span>Save</span>
+                      {loading && (
                         <img
                           src="./images/loader.gif"
-                          className="w-[20px]"
+                          className="w-[20px] mx-2"
                           alt=""
                         />
-                      </button>
-                    ) : (
-                      <button
-                        className="bg-primary-color py-2 px-5 rounded-[8px] text-white"
-                        onClick={passwordUpdate}
-                      >
-                        Save
-                      </button>
-                    )}
+                      )}
+                    </button>
                   </div>
                 </div>
               )}
@@ -896,23 +902,23 @@ const Settings = () => {
                 placeholder="******"
                 className="mt-5 w-full border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm outline-none text-[#ffffff]"
                 onChange={(e) => setMfaCode(e.target.value)}
+                disabled={verifyCodeLoader}
               />
-              {verifyCodeLoader ? (
-                <button className="bg-primary-color text-white py-[8px] px-8 rounded-[6px] mt-5 w-full text-[14px] lg:text-[16px]">
+
+              <button
+                className="flex justify-center items-center bg-primary-color text-white py-[8px] px-8 rounded-[6px] mt-5 w-full text-[14px] lg:text-[16px]"
+                onClick={verifyMFACode}
+                disabled={verifyCodeLoader}
+              >
+                Verify code
+                {verifyCodeLoader && (
                   <img
                     src="./images/loader.gif"
-                    className="w-[20px] mx-auto"
+                    className="w-[20px] mx-2"
                     alt=""
                   />
-                </button>
-              ) : (
-                <button
-                  className="bg-primary-color text-white py-[8px] px-8 rounded-[6px] mt-5 w-full text-[14px] lg:text-[16px]"
-                  onClick={verifyMFACode}
-                >
-                  Verify code
-                </button>
-              )}
+                )}
+              </button>
             </div>
           </div>
         </div>
@@ -1028,22 +1034,27 @@ const Settings = () => {
               </p>
             </div>
             <input
-              type="text"
+              type="password"
               onChange={(e) => setPinCode(e.target.value)}
+              disabled={loading}
               placeholder="Provide your pin code"
               className="md:w-[80%] w-[90%] mx-auto block border border-[#D0D5DD] px-[14px] py-[10px] rounded-[8px] shadow-sm outline-none text-[#000000]"
             />
             <div className="flex flex-col items-center mt-10 gap-4 md:w-[80%] w-[90%] mx-auto mb-[2rem]">
-              {loader ? (
-                <BtnLoader />
-              ) : (
-                <button
-                  onClick={exportPrivateKey}
-                  className="bg-primary-color text-white py-2 px-8 rounded-[6px] w-full text-[14px] lgtext-[16px]"
-                >
-                  Yes, I understand
-                </button>
-              )}
+              <button
+                onClick={exportPrivateKey}
+                disabled={loading}
+                className="flex justify-center items-center bg-primary-color text-white py-2 px-8 rounded-[6px] w-full text-[14px] lgtext-[16px]"
+              >
+                <span>Yes, I understand</span>
+                {loading && (
+                  <img
+                    src="./images/loader.gif"
+                    className="w-[20px] mx-2"
+                    alt=""
+                  />
+                )}
+              </button>
 
               <button
                 onClick={() => setRevealPrivateKey(false)}

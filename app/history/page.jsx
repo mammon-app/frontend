@@ -17,14 +17,16 @@ import TransactionTable from "../components/table/TransactionTable";
 const History = () => {
   const router = useRouter();
   const [transactionHistory, setTransactionHistory] = useState([]);
-  //   const API_KEY = import.meta.env.VITE_API_KEY
-  //   const BASE_URL = import.meta.env.VITE_BASE_URL
+  const [fiatTransactionHistory, setFiatTransactionHistory] = useState([]);
   const user = Cookies.get("token");
   const [searchText, setSearchText] = useState("");
+  const [fiatSearchText, setFiatSearchText] = useState("");
   const [loading, setLoading] = useState(false);
+  const [fiatLoading, setFiatLoading] = useState(false);
 
   useEffect(() => {
     getTransactionHistory();
+    getFiatTransactionHistory();
   }, []);
 
   async function getTransactionHistory() {
@@ -48,7 +50,6 @@ const History = () => {
         }
       );
       const data = await res.json();
-      if (res) setLoading(false);
 
       // Remove duplicate transactionIds
       const uniqueTransactions = Array.from(
@@ -70,10 +71,47 @@ const History = () => {
     }
   }
 
-  function transactionInfo(transaction) {
-    localStorage.setItem("transactionInfo", JSON.stringify(transaction));
-    router.replace("/transaction-info");
+  async function getFiatTransactionHistory() {
+    const storedTx = localStorage.getItem("fiatTransactions");
+    const parsedTx = JSON.parse(storedTx);
+
+    if (parsedTx) {
+      setFiatTransactionHistory(parsedTx);
+    }
+    if (!parsedTx) {
+      setFiatLoading(true);
+    }
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/sep24/queryTransfers24`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user}`,
+            "Api-Key": `${process.env.NEXT_PUBLIC_API_KEY}`,
+          },
+          body: JSON.stringify({
+            assetCode: 'NGNC',
+          }),
+        }
+      );
+      const data = await res.json();
+      if (!res.ok)
+        throw new Error(data, "Failed to fetch fiat transaction history");
+
+      setFiatTransactionHistory(data?.data?.json?.transactions);
+      localStorage.setItem(
+        "fiatTransactions",
+        JSON.stringify(data?.data?.json?.transactions)
+      );
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setFiatLoading(false);
+    }
   }
+
 
   return (
     <div>
@@ -90,10 +128,20 @@ const History = () => {
               <p className="text-white">Back</p>
             </div>
             <TransactionTable
+              name="Crypto Transaction History"
+              tableType="crypto"
               transactionHistory={transactionHistory}
               loadingTx={loading}
               setSearchText={setSearchText}
               searchText={searchText}
+            />
+            <TransactionTable
+              name="Fiat Transaction History"
+              tableType="fiat"
+              transactionHistory={fiatTransactionHistory}
+              loadingTx={fiatLoading}
+              setSearchText={setFiatSearchText}
+              searchText={fiatSearchText}
             />
           </div>
         </div>

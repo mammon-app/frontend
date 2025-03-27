@@ -32,11 +32,11 @@ export default function Home() {
   return (
     <div>
       {mobileNav && (
-        <nav className="flex flex-col items-center justify-between py-[20px] md:px-[80px] px-[16px] bg-[#F8F8F8] fixed w-full top-[0px]">
+        <nav className="flex flex-col items-center justify-between py-[20px] pb-[10px] md:px-[80px] px-[16px] bg-[#F8F8F8] fixed w-full top-[0px]">
           <div className="flex items-center justify-between w-full mb-10">
             <Link href="/">
               <Image
-                src="./images/mammon-app-logo.svg"
+                src="./images/mammon-app-logo-dark.svg"
                 alt="Logo"
                 width={250}
                 height={250}
@@ -44,7 +44,7 @@ export default function Home() {
             </Link>
             <RxDashboard
               onClick={() => setMobileNav(!mobileNav)}
-              className="lg:hidden block text-[22px] cursor-pointer text-[#ffffff]"
+              className="lg:hidden block text-[22px] cursor-pointer text-[black]"
             />
           </div>
           <ul className="flex flex-col items-start gap-[30px] w-full">
@@ -203,7 +203,7 @@ export default function Home() {
                     <div className="flex items-center bg-[#76748014] rounded-full p-2">
                       <img
                         src="./images/Stellar_(XLM).svg"
-                        className="w-[20px]"
+                        className="w-[20px] mx-2"
                         alt=""
                       />
                       <p className="mr-2 ml-1 text-[14px]">XLM</p>

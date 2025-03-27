@@ -2,28 +2,21 @@
 
 import React, { useEffect, useState } from "react";
 import { GoChevronDown } from "react-icons/go";
-import { BsArrowDown, BsArrowUp } from "react-icons/bs";
-import { PiArrowElbowUpLeftLight } from "react-icons/pi";
-import { VscArrowSmallRight } from "react-icons/vsc";
 import SideNav from "../components/side-nav/SideNav";
 import TopNav from "../components/top-nav/TopNav";
 import Cookies from "js-cookie";
 import BtnLoader from "../components/btn-loader/BtnLoader";
 import Alert from "../components/alert/Alert";
-import { BiSearch } from "react-icons/bi";
 import { useRouter } from "next/navigation";
-import Loader from "../components/loader/Loader";
 import ArrayItemLoader from "../components/loader/ArrayItemLoader";
-import ArrayTableLoader from "../components/loader/ArrayTableLoader";
 import TransactionTable from "../components/table/TransactionTable";
+import { BsLightningCharge } from "react-icons/bs";
 
 const Dashboard = () => {
   const [userData, setUserData] = useState();
   const [loadingUserData, setLoadingUserData] = useState(false);
   const [currencyChange, setCurrencyChange] = useState(false);
   const [currentPrice, setCurrentPrice] = useState(0);
-  // const API_KEY = import.meta.env.VITE_API_KEY
-  // const BASE_URL = import.meta.env.VITE_BASE_URL
   const user = Cookies.get("token");
   const [walletAssets, setWalletAssets] = useState();
   const [selectedTrustLine, setSelectedTrustLine] = useState();
@@ -32,7 +25,11 @@ const Dashboard = () => {
   const [PUBLIC_ASSETS, setPublic_Assets] = useState([]);
   const [loadingPUBLIC_ASSETS, setLoadingPUBLIC_ASSETS] = useState(false);
   const [convertCurrency, setConvertCurrency] = useState("USDC");
-  const assets = ["NGN", "USDC"];
+  const assets = [
+    "NGN",
+    "USDC",
+    // "GHSC", "KESC"
+  ];
   const [selectedAsset, setSelectedAsset] = useState();
   const [selectedCurrency, setSelectedCurrency] = useState(assets[0]);
   const [dropDown, setDropDown] = useState();
@@ -53,7 +50,6 @@ const Dashboard = () => {
     getMyAssets();
     getAllTrustLines();
     getTransactionHistory();
-    // getMyWalletInfo()
   }, []);
 
   useEffect(() => {
@@ -257,7 +253,6 @@ const Dashboard = () => {
         setSelectedTrustLine(false);
         getMyAssets();
       }
-      // localStorage.setItem('userData', JSON.stringify(data.data))
     } catch (error) {
       console.error(error);
     }
@@ -297,7 +292,6 @@ const Dashboard = () => {
         setDropDown(false);
         setRemoveDropDown(false);
       }
-      // localStorage.setItem('userData', JSON.stringify(data.data))
     } catch (error) {
       console.error(error);
     }
@@ -343,32 +337,8 @@ const Dashboard = () => {
     }
   }
 
-  // async function getMyWalletInfo() {
-  //     try {
-  //       const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/horizonQueries/getAllWalletAsset/ngn`, {
-  //         headers: {
-  //           'Authorization': `Bearer ${user}`,
-  //           'Api-Key': `${process.env.NEXT_PUBLIC_API_KEY}`,
-  //         }
-  //       });
-  //       const data = await res.json();
-
-  //       if (!res.ok) throw new Error('Failed to fetch user assets');
-  //       setWalletInfo(data.data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-
-  function transactionInfo(transaction) {
-    localStorage.setItem("transactionInfo", JSON.stringify(transaction));
-    router.replace("/transaction-info");
-  }
-
   const walletAssetCodes =
     walletAssets?.allWalletAssets?.map((asset) => asset?.asset_code) || [];
-
-  const publicAssetCodes = Object.keys(PUBLIC_ASSETS);
 
   return (
     <div>
@@ -377,7 +347,7 @@ const Dashboard = () => {
 
         <div className="w-full lg:w-[84%]  ml-auto">
           <TopNav />
-          <div className={`py-[10px] px-[10px]  mt-5 lg:mx-[25px] mx-[10px] `}>
+          <div className={`py-[10px] px-[15px] mt-5 lg:mx-[25px] lg:ml-[40px] mx-[10px] `}>
             <div className={`my-6 lg:block hidden`}>
               <p className="text-[white] md:text-[28px] text-[18px]">
                 Hi, {userData?.username || "loading..."}
@@ -535,43 +505,52 @@ const Dashboard = () => {
                       {loadingPUBLIC_ASSETS ? (
                         <ArrayItemLoader />
                       ) : (
-                        Object.keys(PUBLIC_ASSETS).map((key, index) => {
-                          return (
-                            <div
-                              key={index}
-                              className={
-                                walletAssetCodes?.includes(
-                                  PUBLIC_ASSETS[key]?.code?.toUpperCase()
-                                ) ||
-                                PUBLIC_ASSETS[key].code === "native" ||
-                                walletAssetCodes?.includes(
-                                  PUBLIC_ASSETS[key]?.code
-                                )
-                                  ? "hidden"
-                                  : "flex items-center gap-2 py-3 hover:bg-gray-200 cursor-pointer px-3"
-                              }
-                              onClick={() =>
-                                setSelectedAsset(PUBLIC_ASSETS[key])
-                              }
-                            >
-                              <img
-                                src={PUBLIC_ASSETS[key].image}
-                                alt=""
-                                className="w-[30px]"
-                              />
-                              <div>
-                                <p className="text-[#1C1C1C]">
-                                  {PUBLIC_ASSETS[key].name}
-                                </p>
-                                <p className="text-[9px] text-[#0E0E0E]">
-                                  {PUBLIC_ASSETS[key].code === "native"
-                                    ? "XLM"
-                                    : PUBLIC_ASSETS[key].code}
-                                </p>
-                              </div>
-                            </div>
+                        (() => {
+                          const availableAssets = Object.keys(
+                            PUBLIC_ASSETS
+                          ).filter(
+                            (key) =>
+                              !walletAssetCodes?.includes(
+                                PUBLIC_ASSETS[key]?.code?.toUpperCase()
+                              ) &&
+                              PUBLIC_ASSETS[key].code !== "native" &&
+                              !walletAssetCodes?.includes(
+                                PUBLIC_ASSETS[key]?.code
+                              )
                           );
-                        })
+
+                          return availableAssets.length > 0 ? (
+                            availableAssets.map((key, index) => (
+                              <div
+                                key={index}
+                                className="flex items-center gap-2 py-3 hover:bg-gray-200 cursor-pointer px-3"
+                                onClick={() =>
+                                  setSelectedAsset(PUBLIC_ASSETS[key])
+                                }
+                              >
+                                <img
+                                  src={PUBLIC_ASSETS[key].image}
+                                  alt=""
+                                  className="w-[30px]"
+                                />
+                                <div>
+                                  <p className="text-[#1C1C1C]">
+                                    {PUBLIC_ASSETS[key].name}
+                                  </p>
+                                  <p className="text-[9px] text-[#0E0E0E]">
+                                    {PUBLIC_ASSETS[key].code === "native"
+                                      ? "XLM"
+                                      : PUBLIC_ASSETS[key].code}
+                                  </p>
+                                </div>
+                              </div>
+                            ))
+                          ) : (
+                            <p className="text-center text-gray-500 py-3">
+                              No more assets to add
+                            </p>
+                          );
+                        })()
                       )}
                     </div>
                   </>
@@ -584,35 +563,42 @@ const Dashboard = () => {
                       {loadingWalletAssets ? (
                         <ArrayItemLoader />
                       ) : (
-                        walletAssets?.allWalletAssets?.map((asset, index) => {
-                          return (
-                            <div
-                              key={index}
-                              className={
-                                asset?.asset_code === "NATIVE"
-                                  ? "hidden"
-                                  : "flex items-center gap-2 py-3 hover:bg-gray-200 cursor-pointer px-3"
-                              }
-                              onClick={() => setSelectedTrustLine(asset)}
-                            >
-                              <img
-                                src={asset?.image}
-                                alt=""
-                                className="w-[30px]"
-                              />
-                              <div>
-                                <p className="text-[#1C1C1C]">
-                                  {asset?.asset_name}
-                                </p>
-                                <p className="text-[9px] text-[#0E0E0E]">
-                                  {asset.code === "NATIVE"
-                                    ? "XLM"
-                                    : asset?.asset_code}
-                                </p>
+                        (() => {
+                          const removableAssets =
+                            walletAssets?.allWalletAssets?.filter(
+                              (asset) => asset?.asset_code !== "NATIVE"
+                            );
+
+                          return removableAssets.length > 0 ? (
+                            removableAssets.map((asset, index) => (
+                              <div
+                                key={index}
+                                className="flex items-center gap-2 py-3 hover:bg-gray-200 cursor-pointer px-3"
+                                onClick={() => setSelectedTrustLine(asset)}
+                              >
+                                <img
+                                  src={asset?.image}
+                                  alt=""
+                                  className="w-[30px]"
+                                />
+                                <div>
+                                  <p className="text-[#1C1C1C]">
+                                    {asset?.asset_name}
+                                  </p>
+                                  <p className="text-[9px] text-[#0E0E0E]">
+                                    {asset.code === "NATIVE"
+                                      ? "XLM"
+                                      : asset?.asset_code}
+                                  </p>
+                                </div>
                               </div>
-                            </div>
+                            ))
+                          ) : (
+                            <p className="text-center text-gray-500 py-3">
+                              No more assets to remove
+                            </p>
                           );
-                        })
+                        })()
                       )}
                     </div>
                   </>
@@ -661,6 +647,8 @@ const Dashboard = () => {
               </div>
             </div>
             <TransactionTable
+              name="Crypto Transaction History"
+              tableType="crypto"
               loadingTx={loadingTx}
               transactionHistory={transactionHistory}
               setSearchText={setSearchText}
@@ -714,26 +702,29 @@ const Dashboard = () => {
                   your list of trustlines?
                 </p>
               </div>
-              {loading ? (
-                <div className="flex items-center gap-4 px-[2rem] mb-8 w-full">
-                  <BtnLoader />
-                </div>
-              ) : (
-                <div className="flex items-center gap-4 px-[2rem] mb-8">
-                  <button
-                    className="bg-red-500 text-white p-3 rounded-lg w-full mt-[2rem]"
-                    onClick={() => setSelectedTrustLine(false)}
-                  >
-                    No
-                  </button>
-                  <button
-                    className="bg-primary-color text-white p-3 rounded-lg w-full mt-[2rem]"
-                    onClick={removeTrustLine}
-                  >
-                    Yes, continue
-                  </button>
-                </div>
-              )}
+              <div className="flex items-center gap-4 px-[2rem] mb-8">
+                <button
+                  className="bg-red-500 text-white p-3 rounded-lg w-full mt-[2rem]"
+                  onClick={() => setSelectedTrustLine(false)}
+                  disabled={loading}
+                >
+                  No
+                </button>
+                <button
+                  className="flex justify-center items-center bg-primary-color text-white p-3 rounded-lg w-full mt-[2rem]"
+                  onClick={removeTrustLine}
+                  disabled={loading}
+                >
+                  <span>Yes, continue</span>
+                  {loading && (
+                    <img
+                      src="./images/loader.gif"
+                      className="w-[20px] mx-2"
+                      alt=""
+                    />
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -782,26 +773,29 @@ const Dashboard = () => {
                   list of trustlines?
                 </p>
               </div>
-              {loading ? (
-                <div className="flex items-center gap-4 px-[2rem] mb-8 w-full justify-center">
-                  <BtnLoader />
-                </div>
-              ) : (
-                <div className="flex items-center gap-4 px-[2rem] mb-8">
-                  <button
-                    className="bg-red-500 text-white p-3 rounded-lg w-full mt-[2rem]"
-                    onClick={() => setSelectedAsset(false)}
-                  >
-                    No
-                  </button>
-                  <button
-                    className="bg-primary-color text-white p-3 rounded-lg w-full mt-[2rem]"
-                    onClick={addTrustLine}
-                  >
-                    Yes, continue
-                  </button>
-                </div>
-              )}
+              <div className="flex items-center gap-4 px-[2rem] mb-8">
+                <button
+                  className="bg-red-500 text-white p-3 rounded-lg w-full mt-[2rem]"
+                  onClick={() => setSelectedAsset(false)}
+                  disabled={loading}
+                >
+                  No
+                </button>
+                <button
+                  className="flex justify-center items-center bg-primary-color text-white p-3 rounded-lg w-full mt-[2rem]"
+                  onClick={addTrustLine}
+                  disabled={loading}
+                >
+                  <span>Yes, continue</span>
+                  {loading && (
+                    <img
+                      src="./images/loader.gif"
+                      className="w-[20px] mx-2"
+                      alt=""
+                    />
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -15,8 +15,6 @@ import Loader from "../components/loader/Loader";
 const redHatMono = Red_Hat_Mono({ subsets: ["latin"] });
 
 const DepositCrypto = () => {
-  // const API_KEY = import.meta.env.VITE_API_KEY
-  // const BASE_URL = import.meta.env.VITE_BASE_URL
   const user = Cookies.get("token");
   const [assets, setAssets] = React.useState([]);
   const [dropDown, setDropDown] = useState("");
