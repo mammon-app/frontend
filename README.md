@@ -30,12 +30,13 @@ npm install  # or yarn install
 ```
 
 ### Environment Variables
-Create a `.env` file in the root directory and add the required environment variables:
-```env
-NEXT_PUBLIC_BASE_URL=http://localhost:{backend port}/api/mammonapp
-NEXT_PUBLIC_API_KEY=Your backend API key
-```
-Ensure you replace `{backend port}` with the correct port number and `Your backend API key` with the valid API key.
+Create a `.env` file in the root directory and add the required environment variables. Below is a list of environment variables and their explanations that should be included in your `.env` file:
+
+- **NEXT_PUBLIC_BASE_URL**: The base URL of your backend API, used for making API calls. It should point to the backend server and its API endpoint (e.g., `http://localhost:{backend port}/api/mammonapp`).
+  
+- **NEXT_PUBLIC_API_KEY**: The API key required to authenticate and interact with the backend. It is essential for secure API communication between the frontend and backend.
+
+Make sure to replace `{backend port}` with the actual port number that your backend service is running on, and replace `Your backend API key` with the actual API key you obtained from your backend setup.
 
 ### Running the Project
 Before starting the application, make sure:
@@ -53,4 +54,3 @@ npm start  # or yarn start
 ```
 
 The application will be available at: [http://localhost:3000](http://localhost:3000)
-
