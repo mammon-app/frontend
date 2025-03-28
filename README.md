@@ -41,7 +41,6 @@ The Mammon App frontend is built on a modern, scalable architecture, ensuring hi
 - **Next.js** – Server-side rendering and static site generation for optimal performance
 - **React.js** – Component-based UI design
 - **Tailwind CSS** – Modern styling for responsive and dynamic interfaces
-- **TypeScript** – Ensures type safety and maintainability
 - **Redux Toolkit** – State management for API calls and user data
 - **Axios** – Handles HTTP requests to the Mammon Backend API
 - **WebSockets** – Provides real-time updates for transactions and notifications
