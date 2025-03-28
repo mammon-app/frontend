@@ -1,5 +1,7 @@
 # Mammon App Frontend
 
+![alt text](./public/images/mammonapp.png)
+
 ## Overview
 The **Mammon App Frontend** is a web application built using **Next.js**, providing a seamless and interactive user experience. 
 This project serves as the front-facing interface of the Mammon platform, enabling users to interact with its various financial and trading features.
