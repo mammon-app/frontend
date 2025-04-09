@@ -79,6 +79,12 @@ const Send = () => {
             address,
             assetCode: selectedAsset.asset_code,
             currencyType: "crypto",
+            transactionType: "withdraw",
+            transactionDetails: {
+              amount: Number(sourceAmount),
+              assetCode: selectedAsset.asset_code,
+              address,
+            },
           }),
         }
       );
