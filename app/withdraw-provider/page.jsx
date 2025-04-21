@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { RiBankLine } from "react-icons/ri";
 import SideNav from "../components/side-nav/SideNav";
 import TopNav from "../components/top-nav/TopNav";
