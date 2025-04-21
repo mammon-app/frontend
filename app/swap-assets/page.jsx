@@ -19,17 +19,12 @@ import { useRouter } from "next/navigation";
 import { BsLightningCharge } from "react-icons/bs";
 
 const SwapAsset = () => {
-  const pricesArray = ["200", "300", "500", "1,000"];
-  const router = useRouter();
   const [currencyDropDown, setCurrencyDropDown] = useState(false);
   const [assets, setAssets] = useState([]);
 
   const [selectedAsset, setSelectedAsset] = useState();
   const [selectedAssetReceive, setSelectedAssetReceive] = useState();
   const [currentBalance, setCurrentbalance] = useState(0);
-  // const [currencyDropDown, setCurrencyDropDown] = useState()
-  // const API_KEY = import.meta.env.VITE_API_KEY
-  // const BASE_URL = import.meta.env.VITE_BASE_URL
   const user = Cookies.get("token");
   const [sourceAmount, setSourceAmount] = useState();
 

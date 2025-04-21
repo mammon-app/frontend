@@ -27,6 +27,33 @@ const DepositProvider = () => {
   const [currencyChange, setCurrencyChange] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState(assets[0]);
 
+  useEffect(() => {
+    if (!url) return;
+
+    const iframeDoneListener = () => {
+      const iframe = document.getElementById("deposit-iframe");
+      if (!iframe) return;
+
+      try {
+        const currentUrl = iframe.contentWindow?.location.href;
+        if (
+          currentUrl?.includes("success") ||
+          currentUrl?.includes("callback")
+        ) {
+          setModal(false);
+          setUrl(null);
+          handleQueryTransaction();
+        }
+      } catch (err) {
+        // CORS restrictions might block access, ignore silently
+      }
+    };
+
+    const interval = setInterval(iframeDoneListener, 1500); // check every 1.5s
+
+    return () => clearInterval(interval);
+  }, [url]);
+
   async function initiateWithdrawal() {
     setLoading(true);
     try {
@@ -203,7 +230,28 @@ const DepositProvider = () => {
           </div>
         </div>
       </div>
-      {modal === "withdraw" && (
+      {modal === "deposit" && url && (
+        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center">
+          <div className="relative w-[95%] max-w-[600px] h-[90vh] md:h-[85vh] bg-black border border-white/50 rounded-lg overflow-hidden">
+            <iframe
+              id="deposit-iframe"
+              src={url}
+              title="Deposit Process"
+              className="w-full h-full bg-black"
+            ></iframe>
+            <button
+              className="absolute cursor-pointer top-2 right-2 border border-white/50 bg-[#B3261E] text-white px-3 py-1 rounded hover:bg-red-600"
+              onClick={() => {
+                setModal(false);
+                setUrl(null);
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+      {/* {modal === "withdraw" && (
         <div
           style={{
             position: "fixed",
@@ -219,7 +267,7 @@ const DepositProvider = () => {
           }}
         >
           <div className="bg-[white]" style={{ borderRadius: "0px" }}>
-            {/* <i className=' ri-close-fill block text-[1.2rem] text-end mt-[1rem] mr-[1rem] cursor-pointer'></i> */}
+            <i className=' ri-close-fill block text-[1.2rem] text-end mt-[1rem] mr-[1rem] cursor-pointer'></i>
             <div className="flex items-center justify-between mt-[1rem] px-[2rem] mb-[2rem] flex-col">
               <p className="text-black text-[16px] mb-5 text-center">
                 Note that you are being redirected to a third-party website to
@@ -248,7 +296,7 @@ const DepositProvider = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
       {modal === "confirmPayment" && (
         <div
           style={{
@@ -282,7 +330,7 @@ const DepositProvider = () => {
                   disabled={loading}
                   onClick={queryTransaction}
                 >
-                 <span>Confirm</span>
+                  <span>Confirm</span>
                   {loading && (
                     <img
                       src="./images/loader.gif"
