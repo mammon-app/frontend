@@ -76,7 +76,7 @@ const DepositProvider = () => {
 
       if (res.ok) {
         setUrl(data.data.json.url);
-        setModal("withdraw");
+        setModal("deposit");
         setMsg(data.message);
       } else {
         setMsg(data.message);
